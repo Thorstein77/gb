@@ -1,0 +1,801 @@
+// Alt der gælder for mobil og højere
+
+* { // Gælder alt på hele siden
+  -webkit-box-sizing: border-box; // -webkit- browserunderstøttelse
+  box-sizing: border-box; // Bokse har altid den størrelse man giver uanset om der tilføjes margen mv.
+}
+
+$roed: #2d0d10;
+$roedLys: #501011;
+$hvid: white;
+$hvidGennemsigtig: rgba(255, 255, 255, 0.4);
+$sort: black;
+
+body {
+  margin: 0; // Ingen kanter i siden af browser
+}
+
+h1 {
+  font-family: 'Stardos Stencil', cursive;
+  font-weight: normal;
+  color: $hvid;
+  font-size: 32pt;
+  text-align: center;
+  padding: 30px 0 0 0;
+}
+
+h2 {
+  font-family: 'Stardos Stencil', cursive;
+  font-weight: normal;
+  color: $hvid;
+  font-size: 17pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0; // Ingen ydre margen fra overskrifter
+   // Ingen indre margen fra overskrifter
+}
+
+ul, ol {
+  margin: 0; // Ingen ydre margen fra lister
+  padding: 0; // Ingen indre margen fra lister
+  list-style-position: inside; // List punkter står på linje
+}
+
+li {
+  margin: 0; // Ingen ydre margen fra listpunkter
+}
+
+p {
+  margin: 0; // Ingen ydre margen fra paragraffer
+  padding: 0; // Ingen indre margen fra paragraffer
+  font-family: 'Arial', sans-serif;
+}
+
+a {
+  color: $roedLys;
+}
+
+a:hover {
+  color: #C91F21;
+}
+
+// Sikrer billeder er responsive
+img {
+  display: block; // Billeder er et element (laver linjeskift)
+  max-width: 100%; // Bredde må maks fylde 100%
+  height: auto; // Højden skal tilpasse sig
+}
+
+.genreSection{
+  display: block;
+  width: 100%;
+}
+
+.nyheder {
+
+}
+
+.videoSlideshowContainer {
+  max-width: 992px;
+  position: relative;
+}
+
+.videoSlideshow {
+  display: none;
+}
+
+.naeste, .forrige {
+  cursor: pointer;
+  position: absolute;
+  top: 35%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: $hvid;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+.naeste {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.forrige:hover, .naeste:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.videoSlideTextWeb {
+  color: $hvid;
+  font-size: 15px;
+  padding: 8px 12px;
+  bottom: 8px;
+  width: 100%;
+}
+
+.videoSlideText{
+  display: none;
+}
+
+.videoSlideNumbertext {
+  color: $hvid;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.responsive-video {
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  position: relative;
+}
+
+.responsive-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.backGroundImage{
+  background-image: url("../images/darkBG.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.content{
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+button{
+  color: $hvid;
+  font-family: 'Stardos Stencil', cursive;
+  border: none;
+  cursor: pointer;
+}
+
+.blog button{
+  background-color: $roedLys;
+  font-family: 'Stardos Stencil', cursive;
+  color: $hvid;
+  border: none;
+  border-radius: 25px;
+  width: 80%;
+  cursor: pointer;
+  margin: 25px 0 50px 0;
+  padding: 8px 0 6px 0;
+
+  a{
+    text-decoration: none;
+    color: $hvid;
+  }
+}
+
+.blog button:hover{
+  background-color: $roed;
+}
+
+.blog{
+  display: block;
+  h1{
+    color: $hvid;
+    margin-bottom: 5px;
+  }
+  .blogTxt{
+    color: $hvid;
+    position: relative;
+    padding: 60px 10% 0 10%;
+  }
+  h3{
+    font-family: 'Stardos Stencil', cursive;
+    font-weight: normal;
+    font-size: 18pt;
+    line-height: 21pt;
+    margin-bottom: 10px;
+  }
+
+  ol li{
+    font-family: 'Arial', sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  p{
+    font-size: 10pt;
+    line-height: 12pt;
+  }
+  .flex{
+    display: flex;
+    justify-content: space-around;
+  }
+  img{
+    position: absolute;
+    width: 200px;
+  }
+  background-image: url("../images/blogBG.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  margin-top: 40px;
+  background-position: center;
+}
+
+.kommentar{
+  width: 100%;
+  height: auto;
+  background-color: $roed;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  padding: 0 0 20px 0 ;
+  text-decoration: $hvid;
+
+}
+
+
+form{
+  border-bottom-color: $roed;
+  margin: 0 auto;
+}
+
+button{
+  background-color: $roedLys;
+  font-family: 'Stardos Stencil', cursive;
+  color: $hvid;
+  border: none;
+  border-radius: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
+button:hover{
+  background-color: $roed;
+}
+
+.date1{
+  color: $hvid;
+  font-size: xx-small;
+  padding-left: 20px;
+}
+
+.date2{
+  color: $hvid;
+  font-size: xx-small;
+  padding-left: 20px;
+}
+
+.kommentar1{
+  height: auto;
+  width: 70%;
+  margin: 0 auto;
+  background-color: $roedLys;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-radius: 5px;
+
+}
+
+.billedeTilkommentar1{
+  color: $hvid;
+  height: auto;
+  width: auto;
+  padding: 10px;
+  margin: 10px;
+  margin-left: -50px;
+
+}
+
+.txtTilkomentar1{
+  color: $hvid;
+  font-size: smaller;
+  padding: 10px;
+  text-align: left;
+  width: 90%;
+}
+
+.kommentar2{
+  height: auto;
+  width: 70%;
+  margin: 0 auto;
+  background-color: $roedLys;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  padding-top: 10px;
+  border-radius: 5px;
+}
+
+.billedeTilkommentar2{
+  color: $hvid;
+  height: auto;
+  width: auto;
+  padding: 10px;
+  margin: 10px;
+  margin-left: -50px;
+}
+
+.txtTilkomentar2{
+  color: $hvid;
+  font-size: smaller;
+  padding: 10px;
+  text-align: left;
+  width: 90%;
+}
+
+header{
+  background-color: $roedLys;
+  width: 100%;
+  height: auto;
+  flex-direction: row;
+  display: flex;
+  padding: 15px;
+  justify-content: space-between;
+}
+
+.menuBar{
+  display: none;
+}
+
+.logo{
+  height: 50%;
+  width: 50%;
+
+}
+
+.drop{
+  background-color: transparent;
+}
+
+ .dropDowncontent{
+   display: none;
+   height: auto;
+   width: 90%;
+   background-color: transparent;
+   line-height: 60px;
+   font-size: x-large;
+   text-align: left;
+
+   button:hover{
+     background-color: transparent;
+   }
+
+   a{
+     color: $hvid;
+     text-decoration: none;
+
+   }
+ }
+
+footer{
+  background-color: $roedLys;
+  height: auto;
+  width: 100%;
+  flex-direction: row;
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+
+
+
+  p{
+    color: $hvid;
+    font-size: xx-small;
+  }
+
+
+  .someIkoner_mobil{
+    color: $hvid;
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    width: 15%;
+
+  a{
+    color: $hvid;
+  }
+
+  }
+
+  .someIkoner_web{
+    display: none;
+  }
+}
+
+@mixin genreSlideMix(){
+  width: 100%;
+  height: 640px;
+  background-color: $roed;
+
+  h2{
+    color: $hvid;
+    width: 60%;
+    margin: 0 auto;
+    padding: 5% 0 0 0;
+    border-radius: 2%;
+  }
+}
+
+@mixin genreSlideMobileMix (){
+  background-color: $roedLys;
+  display: block;
+  width: 75%;
+  margin: 0 auto;
+  padding: 3% 7%;
+  border-radius: 2.5%;
+  color: $hvid;
+  overflow: hidden;
+
+  a{
+    text-decoration: none;
+    color: $hvid;
+    float: right;
+
+  }
+}
+
+.genreSlide{
+  @include genreSlideMix;
+
+  .genreSlideMobile{
+    @include genreSlideMobileMix;
+  }
+}
+
+.genreSlide2{
+  @include genreSlideMix;
+  margin: 7% auto 0 auto;
+
+  .genreSlideMobile2{
+    @include genreSlideMobileMix;
+  }
+}
+
+.genreSlideWeb{
+  display: none;
+}
+
+.sektionerMovies h2 {
+  padding-left: 35px;
+}
+
+.sektionerMovies {
+padding: 20px 0;
+}
+
+.sektionStyling {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+
+  i{
+    margin: auto 0;
+    padding: 0 5px;
+    color: white;
+    font-size: 20pt;
+  }
+}
+
+.billedeStyling {
+  padding: 10px 5px;
+}
+
+.billedeStylingWeb {
+  display: none;
+}
+
+.sektionBaggrundsfarver1 {
+ background-color: $hvidGennemsigtig;
+}
+
+.sektionBaggrundsfarver2 {
+  background-color: $roedLys;
+}
+
+.movie {
+  padding: 10px 20px;
+  color: white;
+  height: auto;
+}
+
+.movieposter {
+  display: block;
+  padding-bottom: 20px;
+}
+
+.movieInfo {
+  background-color: $roedLys;
+  margin-top: 20px;
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    list-style-type: none;
+    li {
+      padding: 5px;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  // Alt der ændres i tablet stående fra mobil
+  .blog button{
+    width: 50%;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+  // Alt der ændres i tablet liggende fra mobil og tablet stående
+
+  .logo{
+    padding-left: 10%;
+    img{
+      width: 185px;
+    }
+
+  }
+
+
+  h1 {
+  font-size: 38pt;
+}
+
+  .genreSection{
+    display: block;
+  }
+
+.nyheder {
+  display: grid;
+  grid-template-rows: 30px auto;
+  grid-template-columns: 70% 30%;
+}
+
+.nyhederOverskrift {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.videoSlideshowContainer {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.videoSlideText {
+  display: none;
+}
+
+.videoSlideTextWeb {
+  display: grid;
+  color: $hvid;
+}
+
+.naeste, .forrige {
+  top: 50%;
+}
+
+.beskrivelseGraaBoks {
+  grid-column: 2;
+  grid-row: 2;
+  width: 94%;
+  height: 26vw;
+  background-color: #424242;
+  border-radius: 5px;
+  margin: 100px 0 0 0;
+  padding: 20px 15px 15px 15px;
+  justify-self: center;
+  overflow: auto;
+}
+
+
+  .blog button{
+    width: 30%;
+  }
+
+  .blog{
+    display: block;
+    background-size: 100% 100%;
+    width: 100%;
+    padding: 0;
+
+
+  }
+
+
+  .genreSlide, .genreSlide2{
+    display: none;
+  }
+
+  .genreSlideWeb{
+    display: block;
+    margin: 0 0 5% 0;
+    padding: 0 0 2% 0;
+
+    color: $hvid;
+    background-color: $roed;
+  }
+
+  .genreSlideWebObject{
+
+    h2{
+      padding: 2% 0 1% 4.5%;
+    }
+
+    .flex{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+    }
+  }
+
+  @mixin movieBox(){
+    background-color: $roedLys;
+    width: 25%;
+    padding: 2% 4%;
+    border-radius: 2%;
+
+    a{
+      text-decoration: none;
+      color: $hvid;
+      float: right;
+    }
+  }
+
+  .genre1-1, .genre1-2, .genre1-3, .genre2-1, .genre2-2, .genre2-3{
+    @include movieBox;
+  }
+
+.billedeStylingWeb {
+  display: block;
+}
+
+.movie {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.movieposterTekst {
+  width: 75%;
+}
+
+.movieposter {
+  float: left;
+  width: 40%;
+  padding: 0 30px 30px 0;
+}
+
+.movieTekst {
+}
+
+.movieInfo {
+  margin-top: 0;
+  width: 20%;
+  height: 300px;
+  overflow: hidden;
+  ul {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto;
+  }
+}
+
+#aarstal {
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 1;
+}
+
+#tid {
+  grid-row: 2 / span 1;
+  grid-column: 1 / span 1;
+}
+
+#rating{
+  grid-row: 3 / span 1;
+  grid-column: 1 / span 1;
+}
+
+#genre {
+  grid-row: 4 / span 1;
+  grid-column: 1 / span 1;
+}
+
+}
+
+@media screen and (min-width: 1200px) {
+  // Alt der ændres i computer fra mobil, tablet stående og tablet liggende
+
+
+  .dropDown{
+   display: none;
+ }
+
+  header{
+  height: 100px;
+  padding: 20px;
+
+  a{
+      color: $hvid;
+      text-decoration: none;
+   }
+
+  }
+
+
+  .menuBar{
+    padding-right: 10%;
+    width: 30%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: large;
+    margin-top: 53px;
+
+  }
+
+
+
+  .blog{
+    .blogTxt{
+      padding-top: 40px;
+    }
+    h3{
+      font-size: 20pt;
+      line-height: 24pt;
+      margin-top: 20px;
+    }
+    p{
+      font-size: 12pt;
+      line-height: 15pt;
+    }
+    padding: 30px 15% 0 15%;
+  }
+
+.kommentarContent{
+  width: 80%;
+  margin: 0 auto;
+}
+
+  footer{
+    padding-right: 10%;
+    padding-left: 10%;
+  }
+
+  .someIkoner_mobil{
+    font-size: 30px;
+
+  }
+
+}
+
+@media print {
+  // Alt der gælder for print specifikt
+}
