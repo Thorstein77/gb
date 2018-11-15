@@ -37,6 +37,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Stardos+Stencil" rel="stylesheet">
 
+    <!-- SLICK slider -->
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+
 
 </head>
 
@@ -47,10 +51,7 @@
 
 require ("db/db.php");
 
-    $dbMovie = mysqli_query($db, "SELECT * FROM movies WHERE 
-          mId = '1'");
 
-    $data = mysqli_fetch_assoc($dbMovie);
 
 ?>
 
@@ -64,127 +65,45 @@ require ("db/db.php");
 
     <h1>FILM</h1>
 
-
-
-    <section class="gyser sektionerMovies sektionBaggrundsfarver1">
-
-        <h2>Gyser</h2>
-
-        <div class="sektionStyling">
-
-            <i class="fas fa-chevron-left"></i>
-
-            <div class="billedeStyling">
-                <img src="<?php echo $data["mImg"] ?>">
-                <br>
-                <h2><?php echo $data["mTitle"]."(".$data["mYear"].")"; ?></h2>
-            </div>
-
-            <div class="billedeStyling">
-                <img src="images/bohianrhapsody.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/halloween.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/venom.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/halloween.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/bohianrhapsody.jpg">
-            </div>
-
-
-            <i class="fas fa-chevron-right"></i>
-
-        </div>
-
-    </section>
-
-    <section class="gyser sektionerMovies sektionBaggrundsfarver2">
-
-        <h2>Gyser</h2>
-
-        <div class="sektionStyling">
-
-            <i class="fas fa-chevron-left"></i>
-
-            <div class="billedeStyling">
-                <img src="images/halloween.jpg">
-            </div>
-
-            <div class="billedeStyling">
-                <img src="images/bohianrhapsody.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/halloween.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/venom.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/halloween.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/bohianrhapsody.jpg">
-            </div>
-
-
-            <i class="fas fa-chevron-right"></i>
-
-        </div>
-
-    </section>
-    <section class="gyser sektionerMovies sektionBaggrundsfarver1">
-
-        <h2>Gyser</h2>
-
-        <div class="sektionStyling">
-
-            <i class="fas fa-chevron-left"></i>
-
-            <div class="billedeStyling">
-                <img src="images/halloween.jpg">
-            </div>
-
-            <div class="billedeStyling">
-                <img src="images/bohianrhapsody.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/halloween.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/venom.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/halloween.jpg">
-            </div>
-
-            <div class="billedeStyling billedeStylingWeb">
-                <img src="images/bohianrhapsody.jpg">
-            </div>
-
-
-            <i class="fas fa-chevron-right"></i>
-
-        </div>
-
-    </section>
-
         <?php
+        $dbGenre = mysqli_query($db, "SELECT * FROM genre");
+
+        $i = 1;
+        while($dataG = mysqli_fetch_assoc($dbGenre)){
+            $varG = $dataG["gName"];
+            if(is_integer($i / 2)){
+                echo "<section class='gyser sektionerMovies sektionBaggrundsfarver2'>";
+            }else{
+                echo "<section class='gyser sektionerMovies'>";
+
+            }
+            echo "<h2>".$dataG["gName"]."</h2>";
+            echo "<div class=\"sektionStyling\">";
+
+            $dbMovie = mysqli_query($db, "SELECT * FROM movies WHERE mGenre LIKE '%$varG%'");
+
+
+
+            while ($data = mysqli_fetch_assoc($dbMovie)) {
+                $var = $data ["mId"];
+                ?>
+                <div class="billedeStyling">
+                    <a href="movie.php?variable=<?php echo $var ?>">
+                        <img src="<?php echo $data["mImg"] ?>">
+                        <br>
+                        <h3>
+                            <?php echo $data["mTitle"] ?>
+                        </h3>
+                    </a>
+                </div>
+
+                <?php
+            }
+
+            echo "</div></section>";
+
+            $i++;
+        }
 
         require ("php/footer.php");
 
@@ -197,11 +116,15 @@ require ("db/db.php");
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script type="text/javascript" src="slick/slick.min.js"></script>
+
 <script>
     $(document).ready(function (e) {
         // Din kode her
     });
 </script>
+
 
 <script>
 
@@ -234,7 +157,32 @@ require ("db/db.php");
         text[slideIndex-1].style.display = "block";
     }
 
+
+
+
+
 </script>
 
+<script>
+    $(document).ready(function(){
+        $('.sektionStyling').slick({
+            infinite: true,
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            arrows: true,
+            mobileFirst: true,
+            responsive: [
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 6,
+                        slidesToScroll: 6,
+                        arrows: true
+                    }
+                }
+            ]
+        });
+    });
+</script>
 </body>
 </html>
