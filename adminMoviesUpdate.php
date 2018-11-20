@@ -1,13 +1,19 @@
+<?php
+require ("php/inclLoginCheck.php");
+?>
+
 <!doctype html>
 <!-- Fortæller det er html5 -->
 <!-- html starter og slutter hele dokumentet / lang=da: Fortæller siden er på dansk -->
 <html lang="da">
 
+<head>
+
 <!-- Sætter tegnsætning til utf-8 som bl.a. tillader danske bogstaver -->
 <meta charset="utf-8">
 
 <!-- Titel som ses oppe i browserens tab mv. -->
-<title>Sigende titel</title>
+<title>Opdater Film</title>
 
 <!-- Metatags der fortæller at søgemaskiner er velkomne, hvem der udgiver siden og copyright information -->
 <meta name="robots" content="All">
@@ -37,6 +43,7 @@
 <!-- SLICK slider -->
 <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <link rel="icon" href="images/favicon.png" type="">
 
 </head>
 
@@ -56,9 +63,80 @@ require ("db/db.php");
 
         <?php
         include ("php/header.php");
+        require ("db/db.php");
+        require ("php/movieReq.php");
         ?>
 
         <?php
+
+            $id = mysqli_real_escape_string($db, $_GET["variable"]);
+            if (isset($_POST["mTitle"]) && !empty($_POST["mTitle"]) ){
+                $title = mysqli_real_escape_string($db, $_POST["mTitle"]);
+                mysqli_query($db, "UPDATE movies SET mTitle = '$title' WHERE mId = '$id'");
+            }
+
+            if (isset($_POST["mGenre"]) && !empty($_POST["mGenre"]) ){
+                $genre = mysqli_real_escape_string($db, $_POST["mGenre"]);
+                mysqli_query($db, "UPDATE movies SET mGenre = '$genre' WHERE mId = '$id'");
+            }
+            if (isset($_POST["mYear"]) && !empty($_POST["mYear"]) ){
+                $year = mysqli_real_escape_string($db, $_POST["mYear"]);
+                mysqli_query($db, "UPDATE movies SET mYear = '$year' WHERE mId = '$id'");
+            }
+            if (!empty($_FILES["mImg"]) ){
+                $img = ($_FILES['mImg']['name']);
+                $target = "images/";
+                $target = $target .basename($_FILES['mImg']['name']);
+                mysqli_query($db, "UPDATE movies SET mImg = 'images/$img' WHERE mId = '$id'");
+                if(move_uploaded_file($_FILES['mImg']['tmp_name'],$target)){
+                    echo "Billedet er blevet opdateret.";
+                }else{
+                    echo "Der er sket en fejl.";
+                }
+            }
+            if (isset($_POST["mApi"]) && !empty($_POST["mApi"]) ){
+                $api = mysqli_real_escape_string($db, $_POST["mApi"]);
+                mysqli_query($db, "UPDATE movies SET mApi = '$api' WHERE mId = '$id'");
+            }
+
+        ?>
+
+                <form method="POST" action="adminMoviesUpdate.php?variable=<?php echo $var; ?>" enctype="multipart/form-data">
+                    <label for="mTitle">Title</label>
+                    <input type="text" name="mTitle" id="mTitle">
+
+                    <br><br>
+
+                    <label for="mGenre">Genre</label>
+                    <input type="text" name="mGenre" id="mGenre">
+
+                    <br><br>
+
+                    <label for="mYear">År</label>
+                    <input type="text" name="mYear" id="mYear">
+
+                    <br><br>
+
+                    <label for="mImg">Vælg billede</label>
+                    <input type="file" name="mImg" id="mImg" value="">
+
+                    <br><br>
+
+                    <label for="mApi">API</label>
+                    <input type="text" name="mApi" id="mApi">
+
+                    <button type="submit">Opdater</button>
+                </form>
+
+        <br>
+
+        <a href="adminMovies.php" style="color: white">Tilbage til admin side</a>
+
+        <br><br><br>
+
+
+        <?php
+
         include ("php/footer.php");
         ?>
 
