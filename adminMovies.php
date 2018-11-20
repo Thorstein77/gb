@@ -1,13 +1,19 @@
+<?php
+require ("php/inclLoginCheck.php");
+?>
+
 <!doctype html>
 <!-- Fortæller det er html5 -->
 <!-- html starter og slutter hele dokumentet / lang=da: Fortæller siden er på dansk -->
 <html lang="da">
 
+<head>
+
 <!-- Sætter tegnsætning til utf-8 som bl.a. tillader danske bogstaver -->
 <meta charset="utf-8">
 
 <!-- Titel som ses oppe i browserens tab mv. -->
-<title>Sigende titel</title>
+<title>Administrer Film</title>
 
 <!-- Metatags der fortæller at søgemaskiner er velkomne, hvem der udgiver siden og copyright information -->
 <meta name="robots" content="All">
@@ -37,6 +43,7 @@
 <!-- SLICK slider -->
 <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <link rel="icon" href="images/favicon.png" type="">
 
 </head>
 
@@ -64,6 +71,32 @@ require ("db/db.php");
             </a>
         </div>
 
+        <div class="adminCreateBtn" style="margin-top: 3%">
+            <a href="adminUserCreate.php?signup=createnewuser" target="_blank">
+                <button>
+                    Opret ny admin konto
+                </button>
+            </a>
+        </div>
+
+        <?php
+        if(isset($_SESSION['user'])){
+            echo "<br><br><p style='color: white; width: 100%; text-align: center'>Du er logged ind som ".$_SESSION["user"]."</p>";
+            ?>
+            <div style="width: 20%; margin: 0 auto">
+                <form action="logout.php" method="post">
+                    <button type="submit" name="logout" style="width: 100%; height: 40px; font-size: 25px">
+                        Log ud
+                    </button>
+                </form>
+            </div>
+            <?php
+
+
+
+        }
+        ?>
+
         <div class="adminFlex">
         <?php
 
@@ -82,10 +115,10 @@ require ("db/db.php");
                     </div>
 
                     <div class="adminBtn">
-                        <a href="adminMoviesUpdate.php?variable=<?php echo $var; ?>" target="_blank">
+                        <a href="adminMoviesUpdate.php?variable=<?php echo $var; ?>">
                             <button>Opdater Oplysninger</button>
                         </a>
-                        <a href="adminMoviesDelete.php?variable=<?php echo $var; ?>" target="_blank">
+                        <a href="adminMoviesDelete.php?variable=<?php echo $var; ?>">
                             <button>Slet Film</button>
                         </a>
                     </div>
